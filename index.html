@@ -17,6 +17,7 @@
 
         <select class="js-option">
 
+            <option class="js-input" value="select" disabled selected>Selecciona tu jugada</option>
             <option value="piedra">Piedra</option>
             <option value="papel">Papel</option>
             <option value="tijera">Tijera</option>
@@ -30,15 +31,18 @@
     <p class="js-text">¡Vamos a jugar!</p>
 
     <section>
-        <p>Jugador:</p>
-        <p class="js-resultPlayer">0</p>
+        <p>Jugador: <span class="js-counterPlayer">0</span></p>
+
     </section>
 
     <section>
-        <p>Computadora:</p>
-        <p class="js-resultPc">0</p>
+        <p>Computadora:<span class="js-counterPc">0</span></p>
+
     </section>
 
+    <button class="hidden js-buttonReset">Empieza una nueva partida</button>
+
+    <div class="js-winner hidden"></div>
 
     <script src="./main.js"></script>
 </body>

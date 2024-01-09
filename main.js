@@ -3,12 +3,20 @@
 //creo variables
 
 const option = document.querySelector(".js-option");
+const selectImput = document.querySelector(".js-input")
 const button = document.querySelector(".js-button");
+const buttonReset = document.querySelector(".js-buttonReset");
 const text = document.querySelector(".js-text");
-const resultPlayer = document.querySelector(".js-resultPlayer")
-const resultPc = document.querySelector(".js-resultPc")
+const winnerText = document.querySelector(".js-winner");
+const counterPlayer = document.querySelector(".js-counterPlayer");
+const counterPc = document.querySelector(".js-counterPc");
 
+//variables para el contador de puntos
+let pointsPlayer = 0;
+let pointsPc = 0;
 
+//variable para el número de partidas máximas
+let numberOfMoves = 0; //variable para el número de partidas máximas
 
 
 //creamos función del número aleatorio
@@ -38,13 +46,12 @@ const computerOption = () => {
     return pcOption
 }
 
-//condicional resultado maquina
+//condicional resultado maquina y suma de puntos  al contador
 
 const winner = () => {
 
     const userOption = option.value;
     const pcOption = computerOption()
-    console.log(userOption, pcOption)
 
     if (userOption === pcOption) {
 
@@ -53,26 +60,32 @@ const winner = () => {
     } else if (userOption === 'piedra' && pcOption === 'papel') {
 
         text.innerHTML = '¡Has perdido!';
+        pointsPc++;
 
     } else if (userOption === 'piedra' && pcOption === 'tijera') {
 
         text.innerHTML = '¡Has ganado!';
+        pointsPlayer++;
 
     } else if (userOption === 'papel' && pcOption === 'piedra') {
 
         text.innerHTML = '¡Has ganado!';
+        pointsPlayer++;
 
     } else if (userOption === 'papel' && pcOption === 'tijera') {
 
         text.innerHTML = '¡Has perdido!';
+        pointsPc++;
 
     } else if (userOption === 'tijera' && pcOption === 'piedra') {
 
         text.innerHTML = '¡Has perdido!';
+        pointsPc++;
 
     } else if (userOption === 'tijera' && pcOption === 'papel') {
 
-        text.innerHTML = '¡Has perdido!';
+        text.innerHTML = '¡Has ganado!';
+        pointsPlayer++;
 
     }
 
@@ -80,25 +93,37 @@ const winner = () => {
 
 // //función de contar los puntos
 
-// function counterPoints() {
+function counterPoints() {
 
-//     winner()
+    counterPc.innerHTML = pointsPc;
+    counterPlayer.innerHTML = pointsPlayer;
 
-//     let counterPlayer = Number(resultPlayer.innerHTML);
-//     let counterPc = Number(resultPc.innerHTML);
+}
+
+//función que cuenta el número de partidas
+function numberOfGames() {
+    numberOfMoves++;
+
+    if (numberOfMoves === 10) {
+
+        buttonReset.classList.remove('hidden');
+        button.classList.add('hidden');
+
+        if (counterPc.innerHTML < counterPlayer.innerHTML) {
+
+            winnerText.classList.remove('hidden');
+            winnerText.innerHTML = 'LA MAQUINA HA PERDIDO';
+        } else if (counterPc.innerHTML > counterPlayer.innerHTML) {
+
+            winnerText.classList.remove('hidden');
+            winnerText.innerHTML = 'LA MAQUINA HA GANADO';
+        }
+    };
+}
 
 
-//     if (text.innerHTML = '¡Has ganado!') {
-//         counterPlayer += 1
 
-//     } else if (text.innerHTML = '¡Has perdido!') {
-//         counterPc += 1
-//     }
-
-// }
-
-
-
+//función manejadora del click
 function handleClick(event) {
 
     //añadir un prevent default para que no refresque la página
@@ -108,9 +133,30 @@ function handleClick(event) {
     //llamamos a las funciones
 
     winner()
-    // counterPoints()
+    counterPoints()
+    numberOfGames()
 }
 
-//escuchar el evento del click del botón
+//escuchar el evento del click del botón "Jugar"
 
 button.addEventListener("click", handleClick)
+
+
+//función manejadora del click de reset
+function handleClickReset() {
+
+    buttonReset.classList.add('hidden');
+    button.classList.remove('hidden');
+
+    numberOfMoves = 0;
+    counterPc.innerHTML = 0;
+    counterPlayer.innerHTML = 0;
+    numberOfGames()
+    selectImput.selected = true; //para que el contenido de las opciones vuelvan a ser las iniciales
+    text.innerHTML = "¡Vamos a jugar!";
+    winnerText.classList.add('hidden');
+}
+
+//escuchar el evento del click del botón "Jugar"
+
+buttonReset.addEventListener("click", handleClickReset)

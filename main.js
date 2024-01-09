@@ -10,6 +10,7 @@ const resultPc = document.querySelector(".js-resultPc")
 
 
 
+
 //creamos función del número aleatorio
 
 function getRandomNumber(max) {
@@ -59,19 +60,44 @@ const winner = () => {
 
     } else if (userOption === 'papel' && pcOption === 'piedra') {
 
-        text.innerHTML = '¡Has perdido!';
+        text.innerHTML = '¡Has ganado!';
 
     } else if (userOption === 'papel' && pcOption === 'tijera') {
 
-        text.innerHTML = '¡Has ganado!';
+        text.innerHTML = '¡Has perdido!';
 
     } else if (userOption === 'tijera' && pcOption === 'piedra') {
+
+        text.innerHTML = '¡Has perdido!';
+
+    } else if (userOption === 'tijera' && pcOption === 'papel') {
 
         text.innerHTML = '¡Has perdido!';
 
     }
 
 }
+
+// //función de contar los puntos
+
+// function counterPoints() {
+
+//     winner()
+
+//     let counterPlayer = Number(resultPlayer.innerHTML);
+//     let counterPc = Number(resultPc.innerHTML);
+
+
+//     if (text.innerHTML = '¡Has ganado!') {
+//         counterPlayer += 1
+
+//     } else if (text.innerHTML = '¡Has perdido!') {
+//         counterPc += 1
+//     }
+
+// }
+
+
 
 function handleClick(event) {
 
@@ -82,6 +108,7 @@ function handleClick(event) {
     //llamamos a las funciones
 
     winner()
+    // counterPoints()
 }
 
 //escuchar el evento del click del botón

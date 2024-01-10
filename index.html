@@ -8,42 +8,42 @@
     <link rel="stylesheet" href="./style.css">
 </head>
 
-<body>
+<body class="body">
+    <div class="container">
+        <h1>Juego piedra, papel y tijera</h1>
+        <h2>Introduce aquí tu jugada</h2>
 
-    <h1>Juego piedra, papel y tijera</h1>
-    <h2>Introduce aquí tu jugada</h2>
+        <form class="container-form">
 
-    <form>
+            <select class=" container-form_imputs">
 
-        <select class="js-option">
+                <option class="js-input" value="select" disabled selected>Selecciona tu jugada</option>
+                <option value="piedra">Piedra</option>
+                <option value="papel">Papel</option>
+                <option value="tijera">Tijera</option>
 
-            <option class="js-input" value="select" disabled selected>Selecciona tu jugada</option>
-            <option value="piedra">Piedra</option>
-            <option value="papel">Papel</option>
-            <option value="tijera">Tijera</option>
+            </select>
 
-        </select>
+            <input type="submit" value="Jugar" class="js-button" />
 
-        <input type="submit" value="Jugar" class="js-button" />
+        </form>
 
-    </form>
+        <p class="js-text">¡Vamos a jugar!</p>
 
-    <p class="js-text">¡Vamos a jugar!</p>
+        <section>
+            <p>Jugador: <span class="js-counterPlayer">0</span></p>
 
-    <section>
-        <p>Jugador: <span class="js-counterPlayer">0</span></p>
+        </section>
 
-    </section>
+        <section>
+            <p>Computadora:<span class="js-counterPc">0</span></p>
 
-    <section>
-        <p>Computadora:<span class="js-counterPc">0</span></p>
+        </section>
 
-    </section>
+        <button class="hidden js-buttonReset">Empieza una nueva partida</button>
 
-    <button class="hidden js-buttonReset">Empieza una nueva partida</button>
-
-    <div class="js-winner hidden"></div>
-
+        <div class="js-winner hidden"></div>
+    </div>
     <script src="./main.js"></script>
 </body>
 
